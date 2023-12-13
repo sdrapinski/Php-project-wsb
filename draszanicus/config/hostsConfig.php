@@ -1,0 +1,5 @@
+<?php
+
+define('HOST_PROTOCOL', $_ENV['HOST_PROTOCOL']);
+define('HOST_SUBDOMAIN', $_ENV['HOST_SUBDOMAIN']);
+const WWW_R = HOST_PROTOCOL . "://" . HOST_SUBDOMAIN;

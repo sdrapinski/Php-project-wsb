@@ -4,9 +4,8 @@ use Pecee\SimpleRouter\SimpleRouter as Router;
 use Pecee\Http\Url;
 use Pecee\Http\Response;
 use Pecee\Http\Request;
-use Draszanicus\controllers;
+use \Draszanicus\logic\ControllerLoader;
 
 SimpleRouter::get('/', function() {
-    $home = new controllers\HomeController();
-    return $home->getMessage();
+    ControllerLoader::load("Home");
 });
