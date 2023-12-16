@@ -1,14 +1,14 @@
 <?php
 namespace Draszanicus\controllers;
 
-use Draszanicus\common\controller;
+use Draszanicus\common\Controller;
 use Draszanicus\logic\View;
 
-class HomeController extends controller {
+class HomeController extends Controller {
    public function execute()
    {
        $view = new View();
-       $view->assign("msg", "Hello World!");
+       $view->assign("msg", "Cycki");
        $view->setTemplate("home/Home.tpl");
    }
 }

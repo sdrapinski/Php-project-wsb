@@ -7,3 +7,4 @@ define('ROOT_DIR', $_ENV['ROOT_DIR']);
 
 require_once ROOT_PATH . "/config/errorConfig.php";
 require_once ROOT_PATH . "/config/hostsConfig.php";
+require_once ROOT_PATH . "/config/dbConfig.php";

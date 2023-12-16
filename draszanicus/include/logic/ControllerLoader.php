@@ -2,7 +2,7 @@
 
 namespace Draszanicus\logic;
 
-use Draszanicus\common\controller;
+use Draszanicus\common\Controller;
 
 class ControllerLoader
 {

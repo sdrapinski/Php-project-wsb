@@ -22,6 +22,12 @@
       <path value="$PROJECT_DIR$/draszanicus/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/draszanicus/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/draszanicus/vendor/twbs/bootstrap" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/draszanicus/vendor/doctrine/dbal" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">

@@ -25,8 +25,9 @@ RUN apt-get install php8.1-mbstring -y
 RUN apt-get install openssl
 RUN apt-get install libapache2-mod-php8.1 php-curl -y
 ADD ./Draszanicus.conf /etc/apache2/sites-available
-RUN a2ensite Draszanicus.conf
-RUN a2enmod rewrite
+RUN a2ensite Draszanicus.conf && \
+    a2enmod rewrite
+
 CMD apachectl -D FOREGROUND
-RUN apt-get clean
+
 EXPOSE 80 443 3306

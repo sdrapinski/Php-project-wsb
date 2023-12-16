@@ -2,7 +2,7 @@
 
 namespace Draszanicus\common;
 
-abstract class controller
+abstract class Controller
 {
     abstract public function execute();
 }
