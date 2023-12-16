@@ -5,19 +5,23 @@ namespace Draszanicus\logic;
 use Doctrine\DBAL\DriverManager;
 class DB
 {
-    public static $db;
-
+    private static $conn;
+    private $db;
+    public function __construct($conn = "")
+    {
+        if(!empty($conn)){
+            $this->db = self::$conn;
+        }
+    }
     public static function connect(){
-        self::$db = DriverManager::getConnection(DRASZANICUS_DB);
+        self::$conn = DriverManager::getConnection(DRASZANICUS_DB);
+    }
+    public static function get(){
+        return new DB(self::$conn);
+    }
 
-//        $qb = self::$db->createQueryBuilder();
-//
-//        $qb->select('*')
-//            ->from('users');
-//
-//        $query = $qb->executeQuery();
-//        $user = $query->fetchAssociative();
-//        var_dump($user);
-//        exit();
+    public function query($query){
+        $stmt = $this->db->prepare($query);
+        return $stmt->executeQuery()->fetchAllAssociative();
     }
 }

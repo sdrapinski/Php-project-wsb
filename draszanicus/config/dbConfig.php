@@ -1,9 +1,11 @@
 <?php
 
-const DRASZANICUS_DB = [
-    'dbname' => 'draszanicusdb',
-    'user' => 'giga_user',
-    'password' => 'maslo',
-    'host' => 'draszanicus-db-1',
-    'driver' => 'pdo_mysql',
+$dbConfig = [
+    "dbname" => $_ENV["DB_NAME"],
+    "user" => $_ENV["DB_USER"],
+    "password" => $_ENV["DB_PASSWORD"],
+    "host" => $_ENV["DB_HOST"],
+    "driver" => $_ENV["DB_DRIVER"]
 ];
+
+define("DRASZANICUS_DB", $dbConfig);

@@ -8,7 +8,7 @@ class HomeController extends Controller {
    public function execute()
    {
        $view = new View();
-       $view->assign("msg", "Cycki");
+       $view->assign("msg", "Welcome!");
        $view->setTemplate("home/Home.tpl");
    }
 }
