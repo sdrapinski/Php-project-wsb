@@ -18,7 +18,9 @@ class View
     }
 
     public function setTemplate(string $path): void{
-        $this->smarty->assign($this->context);
+        if(!empty($this->context)){
+            $this->smarty->assign($this->context);
+        }
         $this->smarty->display($path);
     }
 }
