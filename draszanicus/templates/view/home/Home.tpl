@@ -8,4 +8,5 @@
     {include "./Groups.tpl"} {include "./MainContent.tpl"} {include
     "./CreateGroup.tpl"}
   </div>
+  <script defer src="/js/textareaFunctions.js"></script>
 </body>

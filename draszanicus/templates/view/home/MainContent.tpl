@@ -24,33 +24,10 @@
 </div>
 <script>
   const textarea = document.getElementById("PostTextArea");
-  let currentHeight = 100;
-  document
-    .getElementById("PostTextArea")
-    .addEventListener("keydown", function (event) {
-      if (event.key === "Enter" && !event.shiftKey) {
-        document.getElementById("PostForm").submit();
-      } else if (event.key === "Enter" && event.shiftKey) {
-        event.preventDefault();
 
-        let startPos = textarea.selectionStart;
-        let endPos = textarea.selectionEnd;
+  const Post = document.getElementById("PostForm");
 
-        let value = textarea.value;
-        let newValue =
-          value.substring(0, startPos) +
-          "\n" +
-          value.substring(startPos, endPos) +
-          value.substring(endPos, value.length);
-
-        textarea.value = newValue;
-        textarea.setSelectionRange(startPos + 1, startPos + 1);
-        adjustTextareaHeight();
-      }
-    });
-
-  function adjustTextareaHeight() {
-    currentHeight += 15;
-    textarea.style.height = currentHeight + "px";
-  }
+  textarea.addEventListener("keydown", (event) =>
+    HandleEnter(event, textarea, Post, true)
+  );
 </script>
