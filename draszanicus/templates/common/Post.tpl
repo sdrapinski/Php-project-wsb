@@ -1,0 +1,1 @@
+<div>{$nazwa} {$post}</div>
