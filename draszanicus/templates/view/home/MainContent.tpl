@@ -1,7 +1,7 @@
 <div class="col-md-8">
   <div class="row">
     <div class="col-md-12">
-      <form method="get" id="PostForm">
+      <form method="post" id="PostForm">
         <div class="form-floating">
           <textarea
             id="PostTextArea"
@@ -22,12 +22,3 @@
     </div>
   </div>
 </div>
-<script>
-  const textarea = document.getElementById("PostTextArea");
-
-  const Post = document.getElementById("PostForm");
-
-  textarea.addEventListener("keydown", (event) =>
-    HandleEnter(event, textarea, Post, true)
-  );
-</script>

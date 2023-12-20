@@ -1,4 +1,11 @@
 let currentHeight = 100;
+const textarea = document.getElementById("PostTextArea");
+
+const Post = document.getElementById("PostForm");
+
+textarea.addEventListener("keydown", (event)=>{
+  HandleEnter(event, textarea, Post, true)
+})
 
 function HandleEnter(event, textarea, Post, changeSize) {
   if (event.key === "Enter" && !event.shiftKey) {
