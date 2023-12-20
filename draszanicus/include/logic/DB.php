@@ -3,6 +3,8 @@
 namespace Draszanicus\logic;
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception;
+
 class DB
 {
     private static $conn;
@@ -13,15 +15,24 @@ class DB
             $this->db = self::$conn;
         }
     }
-    public static function connect(){
-        self::$conn = DriverManager::getConnection(DRASZANICUS_DB);
+    /**
+     * @throws Exception
+     */
+    public static function connect(): Exception|string
+    {
+        try{
+            self::$conn = DriverManager::getConnection(DRASZANICUS_DB);
+        }catch (Exception $exception){
+            return $exception;
+        }
+        return "fine";
     }
-    public static function get(){
+    public static function get(): DB
+    {
         return new DB(self::$conn);
     }
 
-    public function query($query){
-        $stmt = $this->db->prepare($query);
-        return $stmt->executeQuery()->fetchAllAssociative();
+    public function query(){
+        return $this->db->createQueryBuilder();
     }
 }
