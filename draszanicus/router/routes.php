@@ -9,3 +9,11 @@ use \Draszanicus\logic\ControllerLoader;
 SimpleRouter::get('/', function() {
     ControllerLoader::load("Home");
 });
+
+SimpleRouter::get('/profile', function() {
+    ControllerLoader::load("Profile");
+});
+
+SimpleRouter::match(['get','post'], "/profile/{action}", function ($action){
+    ControllerLoader::load("Profile");
+});

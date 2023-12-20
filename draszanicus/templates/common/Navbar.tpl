@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="./images/logo.png" alt="Logo" height="40" />
+      <a href="http://draszanicus"><img src="./images/logo.png" alt="Logo" height="40" /></a>
     </a>
 
     <form class="form-inline mx-auto col-6">
@@ -17,7 +17,7 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Username</a>
+        <a class="nav-link" href="/profile">Username</a>
       </li>
     </ul>
   </div>
