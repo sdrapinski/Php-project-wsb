@@ -22,12 +22,3 @@
     </div>
   </div>
 </div>
-<script>
-  const textarea = document.getElementById("PostTextArea");
-
-  const Post = document.getElementById("PostForm");
-
-  textarea.addEventListener("keydown", (event) =>
-    HandleEnter(event, textarea, Post, true)
-  );
-</script>
