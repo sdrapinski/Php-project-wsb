@@ -1,5 +1,4 @@
 let currentHeight = 100;
-
 function HandleEnter(event, textarea, Post, changeSize) {
   if (event.key === "Enter" && !event.shiftKey) {
     Post.submit();
@@ -19,12 +18,12 @@ function HandleEnter(event, textarea, Post, changeSize) {
     textarea.value = newValue;
     textarea.setSelectionRange(startPos + 1, startPos + 1);
     if (changeSize) {
-      adjustTextareaHeight(textarea, currentHeight);
+      adjustTextareaHeight(textarea);
     }
   }
 }
 
-function adjustTextareaHeight(textarea, currentHeight) {
+function adjustTextareaHeight(textarea) {
   currentHeight += 15;
   textarea.style.height = currentHeight + "px";
 }
