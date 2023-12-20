@@ -1,4 +1,4 @@
-<div class="col-md-2 border-start">
+<div class="col-md-2">
   <form>
     <div class="form-floating mb-3">
       <input

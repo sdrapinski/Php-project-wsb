@@ -5,7 +5,8 @@
 <body>
   <div class="container-fluid">{include "../../common/Navbar.tpl"}</div>
   <div class="row m-2">
-    {include "./Groups.tpl"} {include "./MainContent.tpl"} {include
-    "./CreateGroup.tpl"}
+    {include "./Teams.tpl" teams=$teams} {include "./MainContent.tpl"
+    posts=$posts} {include "./CreateTeam.tpl"}
   </div>
+  <script defer src="/js/textareaFunctions.js"></script>
 </body>
