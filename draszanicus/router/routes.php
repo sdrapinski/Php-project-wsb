@@ -12,3 +12,6 @@ SimpleRouter::get('/', function() {
 SimpleRouter::post('/', function() {
     ControllerLoader::load("Home");
 });
+SimpleRouter::post("/{action}", function ($action){
+    ControllerLoader::load("Home");
+});

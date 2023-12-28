@@ -8,5 +8,6 @@
     {include "./Teams.tpl" teams=$teams} {include "./MainContent.tpl"
     posts=$posts} {include "./CreateTeam.tpl"}
   </div>
+  {var_dump($info)}
   <script defer src="/js/textareaFunctions.js"></script>
 </body>

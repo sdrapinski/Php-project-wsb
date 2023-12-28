@@ -35,4 +35,8 @@ class DB
     public function query(){
         return $this->db->createQueryBuilder();
     }
+    public function getLastInsertId()
+    {
+        return $this->db->lastInsertId();
+    }
 }
