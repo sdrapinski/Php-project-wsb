@@ -12,8 +12,15 @@ class HomeController extends Controller {
    {
     
     $info = 'def';
-    if(empty($_GET['action'])){
-        $info = 'def-empty';
+    $view = new View();
+    $teams = self::getTeams(1);
+    $ButtonTeamHightlight = reset($teams)['id'];
+    if(!empty($_GET['action'])){
+        if($_GET['action'] == 'switchTeam'){
+            
+            $info = $_GET['teamId'];
+            $ButtonTeamHightlight = $_GET['teamId'];
+        }
     }
     if(!empty($_POST['action'])){
         if($_POST['action'] == 'createTeam'){
@@ -22,20 +29,30 @@ class HomeController extends Controller {
         }
         else if($_POST['action'] == 'createPost'){
             $info = 'createPost';
+            $ButtonTeamHightlight = $_POST['teamIdInput'];
             $this->createPost();
         }
     }
-    if(empty($_POST['action'])){
-        $info = 'def-post-empty';
-    }
+    
 
     
-    $view = new View();
-    $teams = self::getTeams(1);
+   
+   
     $view->assign("teams", $teams);
+    $view->assign("teamButton", $ButtonTeamHightlight);
     $view->assign("info",$info);
     if (!empty($teams)) {
-     $view->assign("posts", self::getPosts(reset($teams)['id']));
+        if(!empty($_GET['action']) && $_GET['action'] == 'switchTeam'){
+            $view->assign("teamId", $_GET['teamId']);
+            $view->assign("posts", self::getPosts($_GET['teamId']));
+
+        }else if(!empty($_POST['action'])&& $_POST['action'] == 'createPost'){
+            $view->assign("posts", self::getPosts($_POST['teamIdInput']));
+        }
+        else{
+            $view->assign("posts", self::getPosts(reset($teams)['id']));
+        }
+     
      } else {
      $view->assign("posts", []); 
      }
@@ -76,7 +93,7 @@ class HomeController extends Controller {
          
          if(!empty($_POST['postText'])){
              $postText = $_POST['postText'] ; 
-             $teamId = 1;
+             $teamId = $_POST['teamIdInput'];
              $userId = 1; 
              
       

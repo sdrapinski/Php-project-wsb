@@ -13,6 +13,7 @@
           <label for="floatingTextarea2">Create a Post</label>
         </div>
         <input type="hidden" name="action" value="createPost" />
+        <input type="hidden" name="teamIdInput" id="teamIdInput" />
       </form>
       {if count($posts) > 0} {foreach $posts as $post}
       <div class="card mb-3">
