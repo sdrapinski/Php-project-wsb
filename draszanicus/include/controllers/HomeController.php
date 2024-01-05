@@ -13,7 +13,8 @@ class HomeController extends Controller {
     
     $info = 'def';
     $view = new View();
-    $teams = self::getTeams(1);
+    $user_id = 1;
+    $teams = self::getTeams($user_id);
     $ButtonTeamHightlight = reset($teams)['id'];
     if(!empty($_GET['action'])){
         if($_GET['action'] == 'switchTeam'){
@@ -25,12 +26,14 @@ class HomeController extends Controller {
     if(!empty($_POST['action'])){
         if($_POST['action'] == 'createTeam'){
             $info = 'createTeam';
-            $this->createTeam();
+            $this->createTeam($user_id);
+            header("Location: /");
         }
         else if($_POST['action'] == 'createPost'){
             $info = 'createPost';
             $ButtonTeamHightlight = $_POST['teamIdInput'];
-            $this->createPost();
+            $this->createPost($user_id);
+           
         }
     }
     
@@ -62,16 +65,16 @@ class HomeController extends Controller {
 
    }
    /// team
-   public function createTeam()
+   public function createTeam(int $user_id)
    {
         
         if(!empty($_POST['teamName']) && !empty($_POST['teamName']) && !empty($_POST['teamName'])){
             $teamName = $_POST['teamName'] ; 
             $teamDescription = $_POST['teamDescription'] ; 
-            $userId = 1; 
+          
             
      
-           Team::createTeam($teamName, $teamDescription, $userId);
+           Team::createTeam($teamName, $teamDescription, $user_id);
         }
       
    }
@@ -88,16 +91,16 @@ class HomeController extends Controller {
     return $PostsList;
     }
 
-    public function createPost()
+    public function createPost($user_id)
     {
          
          if(!empty($_POST['postText'])){
              $postText = $_POST['postText'] ; 
              $teamId = $_POST['teamIdInput'];
-             $userId = 1; 
+             
              
       
-             Posts::createPost($teamId, $userId, $postText);
+             Posts::createPost($teamId, $user_id, $postText);
          }
        
     }
