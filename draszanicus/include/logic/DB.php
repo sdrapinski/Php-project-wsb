@@ -9,30 +9,51 @@ class DB
 {
     private static $conn;
     private $db;
-    public function __construct($conn = "")
+
+    private function __construct($conn)
     {
-        if(!empty($conn)){
-            $this->db = self::$conn;
-        }
+        $this->db = $conn;
     }
+
     /**
      * @throws Exception
      */
     public static function connect(): Exception|string
     {
-        try{
+        try {
             self::$conn = DriverManager::getConnection(DRASZANICUS_DB);
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             return $exception;
         }
         return "fine";
     }
-    public static function get(): DB
+
+    public static function get(): self
     {
-        return new DB(self::$conn);
+        if (!self::$conn) {
+            self::connect();
+        }
+
+        return new self(self::$conn);
     }
 
-    public function query(){
+    public function query()
+    {
         return $this->db->createQueryBuilder();
     }
+
+    public function getLastInsertId()
+    {
+        return $this->db->lastInsertId();
+    }
+
+    public function fetchAssociative($query, $params = [])
+    {
+        $stmt = $this->db->executeQuery($query, $params);
+    
+        return $stmt->fetchAllAssociative();
+    }
+    
+    
+    
 }

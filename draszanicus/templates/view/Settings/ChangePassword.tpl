@@ -24,6 +24,8 @@
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Zmień hasło</button>
+
+                    <input type="hidden" class="form-control" id="newPassword" name="action" value="changePassword">
                 </form>
             </div>
         </div>

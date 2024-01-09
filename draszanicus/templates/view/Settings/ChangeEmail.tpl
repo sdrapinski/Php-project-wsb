@@ -17,9 +17,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="newEmail" class="form-label">Nowy adres e-mail:</label>
-                        <input type="email" class="form-control" id="newEmail" name="newEmail" required>
+                        <input type="email" class="form-control" id="new_email" name="newEmail" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Zmień adres e-mail</button>
+                    <input type="hidden" class="form-control" id="newEmail" name="action" value="change-email">
                 </form>
             </div>
         </div>

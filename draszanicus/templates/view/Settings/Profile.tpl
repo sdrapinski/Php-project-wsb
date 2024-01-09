@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {include "../../common/Head.tpl"}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil użytkownika</title>
+    <!-- Dodaj linki do CSS Bootstrap i JS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        {include "../../common/Navbar.tpl"}
-    </div>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Profil użytkownika</h1>
 
         <!-- Zakładki -->
         <ul class="nav nav-tabs" id="myTabs">
             <li class="nav-item">
-                <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info">Informacje</a>
+                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info">Informacje</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="changeUsername-tab" data-toggle="tab" href="#changeUsername">Zmiana nazwy użytkownika</a>
@@ -28,7 +32,7 @@
 
         <!-- Zawartość zakładek -->
         <div class="tab-content mt-3">
-            <div class="tab-pane fade show active" id="info">
+            <div class="tab-pane fade" id="info">
                 {if isset($username)}
                     <p>Nazwa użytkownika: {$username}</p>
                 {/if}
@@ -36,9 +40,10 @@
                     <p>Email: {$currentEmail}</p>
                 {/if}
                 {if isset($currentGroups)}
-                    <p>Grupy do których należysz: {$currentGroups}</p>
+                    <p>Grupy do których należysz: {foreach $currentGroups as $group} {$group.name}, {/foreach}</p>
                 {/if}
             </div>
+                
             <div class="tab-pane fade" id="changeUsername">
                 {include "./ChangeUsername.tpl"}
             </div>
@@ -50,18 +55,23 @@
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function(){
-            // Śledzenie zmiany hashu w adresie URL
-            $(window).on('hashchange', function() {
+            // Funkcja obsługująca zmianę hasha w adresie URL
+            function onHashChange() {
                 var hash = window.location.hash;
                 // Aktywacja odpowiedniej zakładki na podstawie hashu
-                $('.nav-tabs a[href="' + hash + '"]').tab('show');
-            });
+                if (hash) {
+                    $('.nav-tabs a[href="' + hash + '"]').tab('show');
+                }
+            }
+
+            // Śledzenie zmiany hashu w adresie URL
+            $(window).on('hashchange', onHashChange);
 
             // Inicjalizacja zakładek na podstawie aktualnego hashu
-            var hash = window.location.hash;
-            $('.nav-tabs a[href="' + hash + '"]').tab('show');
+            onHashChange();
         });
     </script>
 </body>

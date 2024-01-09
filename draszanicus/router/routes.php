@@ -14,6 +14,10 @@ SimpleRouter::get('/profile', function() {
     ControllerLoader::load("Profile");
 });
 
+SimpleRouter::match(['get','post'],"/{action}", function ($action){
+    ControllerLoader::load("Home");
+});
+
 SimpleRouter::match(['get','post'], "/profile/{action}", function ($action){
     ControllerLoader::load("Profile");
 });
