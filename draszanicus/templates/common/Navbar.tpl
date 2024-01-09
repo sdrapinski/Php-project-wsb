@@ -15,10 +15,9 @@
       </div>
     </form>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Username</a>
-      </li>
-    </ul>
+    <div id="navPanel">
+      {include "./NavPanel.tpl"}
+    </div>
+
   </div>
 </nav>

@@ -2,7 +2,6 @@
 namespace Draszanicus\controllers;
 
 use Draszanicus\common\Controller;
-use Draszanicus\logic\DB;
 use Draszanicus\logic\View;
 
 class HomeController extends Controller {

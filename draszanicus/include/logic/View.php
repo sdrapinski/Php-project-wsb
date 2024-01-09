@@ -21,6 +21,10 @@ class View
         if(!empty($this->context)){
             $this->smarty->assign($this->context);
         }
+
+        $user = User::getUser();
+
+        $this->smarty->assign("user", $user);
         $this->smarty->display($path);
     }
 }
