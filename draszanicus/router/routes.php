@@ -6,9 +6,14 @@ use Pecee\Http\Response;
 use Pecee\Http\Request;
 use \Draszanicus\logic\ControllerLoader;
 
+
 SimpleRouter::get('/', function() {
     ControllerLoader::load("Home");
 });
 SimpleRouter::post('/', function() {
     ControllerLoader::load("Home");
+});
+SimpleRouter::post('/search', function() {
+    
+    ControllerLoader::load("Search");
 });

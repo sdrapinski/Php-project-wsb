@@ -31,8 +31,17 @@ class DB
     {
         return new DB(self::$conn);
     }
-
+    public static function insert($tableName, array $data)
+    {
+        $conn = self::$conn;
+        $conn->insert($tableName, $data);
+    }
+    public function delete($tableName,$id)
+    {
+        $this->conn->delete($tableName, ['id' => $id]);
+    }
     public function query(){
         return $this->db->createQueryBuilder();
     }
+    
 }
