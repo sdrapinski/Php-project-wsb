@@ -5,6 +5,7 @@ use Draszanicus\logic\Team;
 use Draszanicus\logic\Posts;
 
 use Draszanicus\common\Controller;
+use Draszanicus\logic\User;
 use Draszanicus\logic\View;
 
 class HomeController extends Controller {
@@ -13,7 +14,8 @@ class HomeController extends Controller {
     
     $info = 'def';
     $view = new View();
-    $user_id = 1;
+    $user = User::getUser();
+    $user_id = !empty($user) ?? $user["id"];
     $teams = self::getTeams($user_id);
     $ButtonTeamHightlight = reset($teams)['id'];
     if(!empty($_GET['action'])){
