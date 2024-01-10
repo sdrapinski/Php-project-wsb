@@ -8,47 +8,46 @@ use Draszanicus\logic\DB;
 class ProfileController extends Controller
 {
     
-    private $userId;
+   
 
-    public function __construct()
-    {
-        // Pobierz identyfikator użytkownika z sesji
-        session_start();
-        $this->userId = 2;
-    }
+    
 
 
     public function execute()
     {
-        $userData = $this->getUserData($this->userId);
+        $userId = 2;
+        $userData = $this->getUserData($userId);
+        
 
         $view = new View();
 
         $view->assign("username", $userData['username'] ?? '');
         $view->assign("currentEmail", $userData['email'] ?? '');
-        $view->assign("currentGroups", $this->getUserTeams($this->userId));
-        $view->assign("Userek", 'CEGLASTY');
-        $view->assign("Password", 'CEGLASTY');
-        $view->assign("changeEmail", 'CEGLASTY');
+        $view->assign("currentGroups", $this->getUserTeams($userId));
+        $error_info = "default";
+     
 
         if (!empty($_POST['action'])) {
                 if ($_POST['action'] == "change-username") {
-                $this->changeUsername();
-                $view->assign("Userek", 'test');
+               $error_info =  $this->changeUsername($userId);
+                $view->assign("error_info",$error_info);
                 $view->setTemplate("Settings/Profile.tpl");
             }        
             elseif ($_POST['action'] == "change-password") {
-                $this->changePassword();
-                $view->assign("Password", 'teste');
+                
+               $error_info =  $this->changePassword($userId);
+                $view->assign("error_info",$error_info);
+                
                 $view->setTemplate("Settings/Profile.tpl");
 
             } elseif ($_POST['action'] == "change-email") {
-                $this->changeEmail();
-                $view->assign("changeEmail", 'testerer');
+               $error_info =  $this->changeEmail($userId);
+                $view->assign("error_info",$error_info);
                 $view->setTemplate("Settings/Profile.tpl");
             }
         } else
         {
+            $view->assign("error_info",$error_info);
             $view->setTemplate("Settings/Profile.tpl"); 
         }
 
@@ -56,40 +55,100 @@ class ProfileController extends Controller
 
     }
 
-    public function changeEmail()
+    public function changeEmail($userId)
     {
         $newEmail = $_POST['newEmail']; 
-        $this->updateUserEmail(2, $newEmail);
 
-        $this->redirectToProfile();
+        if(!empty($newEmail) && filter_var($newEmail,FILTER_VALIDATE_EMAIL)){
+            if(!$this->checkEmail($newEmail)){
+                $this->updateUserEmail($userId, $newEmail);
+                return "";
+            }
+            return "This email already exist";
+          
+        }else{
+            return "Please insert correct email type";
+        }
+
+        
+
+       
     }
 
-    public function changePassword()
+    public function changePassword($userId)
     {
         $newPassword = $_POST['newPassword'];
-        $this->updateUserPassword(2, $newPassword);
+        $confirmPassword = $_POST['confirmPassword'];
 
-        $this->redirectToProfile();
+        if( !empty($confirmPassword) && !empty($newPassword) && strlen($newPassword) >=8 && $confirmPassword == $newPassword){
+            $this->updateUserPassword($userId, $newPassword);
+            return "";
+         
+           
+        }else{
+           return "Wrong Passoword parameters. </br> Password should have 8 letters and match with confirm password";
+        
+        }
+       
+       
+
+        
     }
 
-    public function changeUsername()
+    public function changeUsername($userId)
     {
         $newUsername = $_POST['newUsername'];
-        $currentUsername = $_POST['currentUsername'];
+       
+        if(!empty($newUsername)){
+            if(!($this->checkUsername($newUsername)))
+            {
+                $this->updateUsername($userId, $newUsername);
+                 return "";
+            }
+            return "This username already exist";
+            
+        }
+        else{
+            return "Username cant be empty";
+        }
     
-        $this->updateUsername(2, $newUsername);
+       
+
+
     
-        $this->redirectToProfile();
+        
     }
     
-    
+    private function checkUsername($username)
+    {
+        $query = DB::get()->query()
+            ->select('username')
+            ->from('Users')
+            ->where('username = ?')
+            ->setParameter(0, $username);
+           
+
+            $result = $query->execute()->fetchOne();
+
+            return $result > 0;
+    }
+
+    private function checkEmail($email)
+    {
+        $query = DB::get()->query()
+            ->select('email')
+            ->from('Users')
+            ->where('email = ?')
+            ->setParameter(0, $email);
+           
+
+            $result = $query->execute()->fetchOne();
+
+            return $result > 0;
+    }
     
 
-    private function redirectToProfile()
-    {
-        header('Location: /profile');
-        exit();
-    }
+   
 
     private function getUserData($userId)
     {
@@ -135,6 +194,7 @@ class ProfileController extends Controller
 
     private function updateUserPassword($userId, $newPassword)
     {
+        
         return DB::get()->query()
             ->update('Users')
             ->set('password', '?')
