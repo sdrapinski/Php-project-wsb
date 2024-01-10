@@ -16,6 +16,7 @@ class Team {
         ->execute()
         ->fetchAll();
 
+<<<<<<< HEAD
     }
 
     public static function TeamsSearched(string $prompt){

@@ -48,4 +48,11 @@ class DB
         return $this->db->lastInsertId();
     }
 
+    public function fetchAssociative($query, $params = [])
+    {
+        $stmt = $this->db->executeQuery($query, $params);
+
+        return $stmt->fetchAllAssociative();
+    }
+
 }

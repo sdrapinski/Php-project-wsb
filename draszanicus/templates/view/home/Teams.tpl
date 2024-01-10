@@ -68,4 +68,8 @@
     <span> You don't have any teams</span>
   </div>
   {/if}
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> origin/user_settings
