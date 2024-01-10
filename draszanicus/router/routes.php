@@ -12,6 +12,10 @@ SimpleRouter::get('/', function() {
 SimpleRouter::post('/', function() {
     ControllerLoader::load("Home");
 });
+SimpleRouter::match(['get','post'],"/{action}", function ($action){
+    ControllerLoader::load("Home");
+});
+
 
 SimpleRouter::post('/loginApi', function (){
     ControllerLoader::load("LoginApi");
