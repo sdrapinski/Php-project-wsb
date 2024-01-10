@@ -36,7 +36,12 @@
                 return
             }
 
-            document.getElementById("navPanel").innerHTML = result
+            document.body.innerHTML = result
+            const html = document.getElementById("navPanel")
+            const scripts = html.querySelectorAll("script")
+            scripts.forEach((script)=>{
+            eval(script.textContent)
+            })
         })
    <\/script>`
 

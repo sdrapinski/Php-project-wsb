@@ -18,11 +18,8 @@ class LoginApiController extends Controller
 
         if($user !== "fail" && !empty($user)){
             User::saveUser(reset($user));
-            $view = new View();
-            $view->setTemplate("../common/NavPanel.tpl");
         }
-        else{
-            echo json_encode("fail");
-        }
+
+        header("Location: /");
     }
 }
