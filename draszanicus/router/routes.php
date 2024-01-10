@@ -20,3 +20,7 @@ SimpleRouter::match(['get','post'],"/{action}", function ($action){
 SimpleRouter::post('/loginApi', function (){
     ControllerLoader::load("LoginApi");
 });
+SimpleRouter::post('/search', function() {
+
+    ControllerLoader::load("Search");
+});
