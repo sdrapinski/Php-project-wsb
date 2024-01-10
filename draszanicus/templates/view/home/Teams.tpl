@@ -50,7 +50,7 @@
 <div class="col-md-2 h-100">
   {if count($teams) > 0} {foreach $teams as $team}
   <div class="col m-3 d-flex justify-content-center">
-    <form action="/switchTeam" method="get">
+    <form action="/home/switchTeam" method="get">
       <input type="hidden" name="action" value="switchTeam" />
       <input type="hidden" name="teamId" value="{$team.id}" />
       <button
@@ -68,8 +68,4 @@
     <span> You don't have any teams</span>
   </div>
   {/if}
-<<<<<<< HEAD
 </div>
-=======
-</div>
->>>>>>> origin/user_settings

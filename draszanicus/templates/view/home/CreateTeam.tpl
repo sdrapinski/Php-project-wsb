@@ -1,5 +1,5 @@
 <div class="col-md-2">
-  <form action="/createTeam" method="post">
+  <form action="/home/createTeam" method="post">
     <div class="form-floating mb-3">
       <input
         type="text"

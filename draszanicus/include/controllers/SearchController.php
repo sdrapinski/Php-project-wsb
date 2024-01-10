@@ -15,39 +15,37 @@ class SearchController extends Controller
     public function execute()
     {
         $user = User::getUser();
-        $userId = $user["id"];
-
+        $userId = array_key_exists("id", $user) ? (int)$user["id"] : 0  ;
+       
+        $teams = [];
         $view = new View();
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action']) && $_POST['action'] === 'Search') {
             $searchTerm = $_POST['search'];
             $teams = Team::TeamsSearched($searchTerm);
+           
 
         }
-        if (empty($userId) && !empty($teams)) {
-            foreach ($teams as &$team) {
-                $team['MemberCount'] = Users::MemberCount($team['id']);
-            }
-            $view->assign("teams", $teams);
-            $view->setTemplate("Searchout/SearchOut.tpl");
-            exit();
-        } else if (empty($userId)) {
-            $view->assign("teams", []);
-            $view->assign("MemberCount", []);
-            $view->setTemplate("Searchout/SearchOut.tpl");
-            exit();
-        }
+      
+       
+        
+        
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Leave'])) {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Leave']) && !empty($userId)) {
             $teamid = $_POST['Leave'];
             Team::LeaveTeam($userId, $teamid);
+            header("Location: /");
         }
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Join'])) {
+        
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Join'])&& !empty($userId)) {
             $teamid = $_POST['Join'];
             if (!Team::isUserJoined($userId, $teamid)) {
                 Team::JoinTeam($userId, $teamid);
+                header("Location: /home/switchTeam?action=switchTeam&teamId=". $teamid);
+             
+
             }
         }
+       
 
         if (!empty($teams)) {
             foreach ($teams as &$team) {
@@ -55,11 +53,13 @@ class SearchController extends Controller
                 $team['MemberCount'] = Users::MemberCount($team['id']);
             }
             $view->assign("teams", $teams);
+            
         } else {
             $view->assign("teams", []);
             $view->assign("MemberCount", []);
+           
         }
-        $userGroups = Team::getUserTeams('user1');
+        $userGroups = Team::getUserTeams($userId);
         $view->assign("userGroups", $userGroups);
         $view->setTemplate("Searchout/SearchOut.tpl");
 

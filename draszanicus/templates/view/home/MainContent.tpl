@@ -1,7 +1,7 @@
 <div class="col-md-8 border-end border-start">
   <div class="row">
     <div class="col-md-12">
-      <form method="post" action="/createPost" id="PostForm">
+      <form method="post" action="/home/createPost" id="PostForm">
         <div class="form-floating">
           <textarea
             id="PostTextArea"
