@@ -9,6 +9,9 @@ use \Draszanicus\logic\ControllerLoader;
 SimpleRouter::get('/', function() {
     ControllerLoader::load("Home");
 });
+SimpleRouter::post('/', function() {
+    ControllerLoader::load("Home");
+});
 
 SimpleRouter::post('/loginApi', function (){
     ControllerLoader::load("LoginApi");
