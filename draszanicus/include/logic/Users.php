@@ -16,4 +16,11 @@ class Users {
             $result = $query->execute()->fetchOne();
             return $result;
     }
+    public static function register($login, $password,$email) {
+        DB::insert('Users', [
+            'username' => $login,
+            'password' => $password,
+            'email' => $email,
+        ]);
+    }
 }

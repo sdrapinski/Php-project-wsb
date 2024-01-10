@@ -1,13 +1,13 @@
 <script src="/js/modals/modal.min.js"></script>
 
-<button id="loginBtn" class="btn btn-primary" type="button">Log in</button>
+<button id="registertn" class="btn btn-primary" type="button">Log in</button>
 
 <script>
-    const btn = document.getElementById("loginBtn")
+    const btn = document.getElementById("registertn")
 
     const body = `
         <div class="card">
-        <form method="post" id="loginForm">
+        <form method="post" id="registerForm">
         <div class="card-body">
         <div class="row">
         <div class="col-12 input-group my-1">
@@ -16,29 +16,21 @@
     <div class="col-12 input-group my-1">
         <input class="form-control" type="text" placeholder="Password" name="inputPassword">
     </div>
+    <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="Repeat Password" name="inputPasswordAgain">
+    </div>
+    <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="e-mail" name="inputEmail">
+    </div>
     </div>
     </div>
     </form>
     <div class="card-footer">
-        <button class="btn btn-primary" data-bs-dismiss="modal" type="button" id="login">Log in</button>
-        <button class="btn btn-primary" data-bs-dismiss="modal" type="button" id="registertn">Register</button>
+        <button class="btn btn-primary" data-bs-dismiss="modal" type="button" id="register">Register</button>
     </div>
     </div>
     <script>
-        document.getElementById("login").addEventListener("click",async ()=>{
-            const form = new FormData(document.getElementById("loginForm"))
-            const response = await fetch("/loginApi",{
-                method:"post",
-                body: form
-            })
-            const result = await response.text()
-            if(result === '"fail"'){
-                return
-            }
-
-            document.getElementById("navPanel").innerHTML = result
-        })
-         document.getElementById("register").addEventListener("click",async ()=>{
+        document.getElementById("register").addEventListener("click",async ()=>{
             const form = new FormData(document.getElementById("registerForm"))
             const response = await fetch("/RegisterApi",{
                 method:"post",
