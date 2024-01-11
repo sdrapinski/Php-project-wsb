@@ -8,23 +8,17 @@ use Draszanicus\logic\User;
 
 class ProfileController extends Controller
 {
-    
-   
-
-    
-
-
+    private array $userData;
     public function execute()
     {
-        $user = User::getUser();
-        $userId = array_key_exists("id", $user) ? (int)$user["id"] : 0  ;
-        $userData = $this->getUserData($userId);
+        $this->userData = User::getUser();
+        $userId = array_key_exists("id", $this->userData) ? (int)$this->userData["id"] : 0  ;
         
 
         $view = new View();
 
-        $view->assign("username", $userData['username'] ?? '');
-        $view->assign("currentEmail", $userData['email'] ?? '');
+        $view->assign("username", $this->userData['username'] ?? '');
+        $view->assign("currentEmail", $this->userData['email'] ?? '');
         $view->assign("currentGroups", $this->getUserTeams($userId));
         $error_info = "";
      
@@ -35,6 +29,7 @@ class ProfileController extends Controller
                 
                $error_info =  $this->changeUsername($userId);
                 $view->assign("error_info",$error_info);
+                $view->assign("username", $this->userData['username'] ?? '');
                 $view->setTemplate("Settings/Profile.tpl");
 
             }        
@@ -48,6 +43,7 @@ class ProfileController extends Controller
             } elseif ($_POST['action'] == "change-email") {
                $error_info =  $this->changeEmail($userId);
                 $view->assign("error_info",$error_info);
+                $view->assign("currentEmail", $this->userData['email'] ?? '');
                 $view->setTemplate("Settings/Profile.tpl");
             }
         } else
@@ -55,6 +51,8 @@ class ProfileController extends Controller
             $view->assign("error_info",$error_info);
             $view->setTemplate("Settings/Profile.tpl"); 
         }
+
+        User::saveUser($this->userData);
 
         
 
@@ -67,6 +65,7 @@ class ProfileController extends Controller
         if(!empty($newEmail) && filter_var($newEmail,FILTER_VALIDATE_EMAIL)){
             if(!$this->checkEmail($newEmail)){
                 $this->updateUserEmail($userId, $newEmail);
+                $this->userData["email"] = $newEmail;
                 return "";
             }
             return "This email already exist";
@@ -87,6 +86,7 @@ class ProfileController extends Controller
 
         if( !empty($confirmPassword) && !empty($newPassword) && strlen($newPassword) >=8 && $confirmPassword == $newPassword){
             $this->updateUserPassword($userId, $newPassword);
+            $this->userData["password"] = $newPassword;
             return "";
          
            
@@ -108,6 +108,7 @@ class ProfileController extends Controller
             if(!($this->checkUsername($newUsername)))
             {
                 $this->updateUsername($userId, $newUsername);
+                $this->userData["username"] = $newUsername;
                  return "";
             }
             return "This username already exist";
