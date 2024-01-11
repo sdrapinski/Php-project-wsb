@@ -23,6 +23,12 @@ SimpleRouter::post('/loginApi', function (){
 SimpleRouter::get('/logoutApi', function (){
     ControllerLoader::load("LogoutApi");
 });
+SimpleRouter::post('/RegisterApi', function (){
+    ControllerLoader::load("RegisterApi");
+});
+SimpleRouter::get('/RegisterApi', function (){
+    ControllerLoader::load("RegisterApi");
+});
 SimpleRouter::match(['get','post'],'/search', function() {
 
     ControllerLoader::load("Search");

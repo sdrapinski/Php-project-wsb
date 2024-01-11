@@ -19,7 +19,12 @@ class HomeController extends Controller {
 
     if($user_id){
         $teams = self::getTeams($user_id);
-        $ButtonTeamHightlight = reset($teams)['id'];
+        if(count($teams) > 0){
+            $ButtonTeamHightlight = reset($teams)['id'];
+        }else{
+            $ButtonTeamHightlight = 0;
+        }
+        
     }else{
         $teams = [];
         $ButtonTeamHightlight = 0;
@@ -54,6 +59,7 @@ class HomeController extends Controller {
     $view->assign("teams", $teams);
     $view->assign("teamButton", $ButtonTeamHightlight);
     $view->assign("info",$info);
+    $view->assign("user_id",(int)$user_id);
     if (!empty($teams)) {
         if(!empty($_GET['action']) && $_GET['action'] == 'switchTeam'){
             $view->assign("teamId", $_GET['teamId']);
@@ -78,7 +84,7 @@ class HomeController extends Controller {
    public function createTeam(int $user_id)
    {
         
-        if(!empty($_POST['teamName']) && !empty($_POST['teamName']) && !empty($_POST['teamName'])){
+        if(!empty($_POST['teamName']) && !empty($_POST['teamName']) && !empty($_POST['teamName']) && $user_id > 0){
             $teamName = $_POST['teamName'] ; 
             $teamDescription = $_POST['teamDescription'] ; 
           

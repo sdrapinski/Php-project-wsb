@@ -1,6 +1,7 @@
 <div class="col-md-8 border-end border-start">
   <div class="row">
     <div class="col-md-12">
+      {if $user_id >0}
       <form method="post" action="/home/createPost" id="PostForm">
         <div class="form-floating">
           <textarea
@@ -25,6 +26,12 @@
       {/foreach}{else}
       <div>
         <p class="card-text">this team has no posts</p>
+      </div>
+      {/if} {else}
+      <div>
+        <h3 class="card-text">
+          Login or register to join groups and see posts
+        </h3>
       </div>
       {/if}
     </div>

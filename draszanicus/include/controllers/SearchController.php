@@ -59,8 +59,10 @@ class SearchController extends Controller
             $view->assign("MemberCount", []);
            
         }
+
         $userGroups = Team::getUserTeams($userId);
         $view->assign("userGroups", $userGroups);
+        $view->assign("userId", $userId);
         $view->setTemplate("Searchout/SearchOut.tpl");
 
     }

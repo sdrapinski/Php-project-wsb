@@ -3,10 +3,12 @@
 <button id="loginBtn" class="btn btn-primary" type="button">Log in</button>
 
 <script>
-    const btn = document.getElementById("loginBtn")
+  const btn = document.getElementById("loginBtn");
 
-    const body = `
+  const body = `
         <div class="card">
+            <div>
+            <h3> Login </h3> </div>
         <form method="post" id="loginForm">
         <div class="card-body">
         <div class="row">
@@ -16,6 +18,27 @@
     <div class="col-12 input-group my-1">
         <input class="form-control" type="text" placeholder="Password" name="inputPassword">
     </div>
+    </div>
+    </div>
+    </form>
+    <div>
+    <h3> Register </h3> </div>
+    <form method="post" id="registerForm">
+        <div class="card-body">
+        <div class="row">
+        <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="Login" name="inputLogin">
+        </div>
+    <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="Password" name="inputPassword">
+    </div>
+    <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="Repeat Password" name="inputPasswordAgain">
+    </div>
+    <div class="col-12 input-group my-1">
+        <input class="form-control" type="text" placeholder="e-mail" name="inputEmail">
+    </div>
+    <input class="form-control" type="hidden" placeholder="e-mail" name="action" value="createUser">
     </div>
     </div>
     </form>
@@ -43,12 +66,27 @@
             eval(script.textContent)
             })
         })
-   <\/script>`
 
-    btn.addEventListener("click", ()=>{
-        makeModal({
-            body: body,
-            size: "md"
+        document.getElementById("register").addEventListener("click",async ()=>{
+            console.log("dziala");
+            const form = new FormData(document.getElementById("registerForm"))
+            const response = await fetch("/RegisterApi",{
+                method:"post",
+                body: form
+            })
+            const result = await response.text()
+            if(result === '"fail"'){
+                return
+            }
+
+            
         })
-    })
+   <\/script>`;
+
+  btn.addEventListener("click", () => {
+    makeModal({
+      body: body,
+      size: "md",
+    });
+  });
 </script>

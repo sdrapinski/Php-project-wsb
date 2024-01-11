@@ -20,9 +20,15 @@
       ></textarea>
       <label for="floatingTextarea">Description</label>
     </div>
+    {if $user_id > 0}
     <button type="submit" class="btn btn-primary w-100 h-30">
       Create Group
     </button>
+    {else}
+    <button type="submit" class="btn btn-secondary w-100 h-30" disabled>
+      Login to Create
+    </button>
+    {/if}
     <input type="hidden" name="action" value="createTeam" />
   </form>
 </div>

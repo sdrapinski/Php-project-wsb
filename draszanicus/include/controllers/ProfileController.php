@@ -4,6 +4,7 @@ namespace Draszanicus\controllers;
 use Draszanicus\common\Controller;
 use Draszanicus\logic\View;
 use Draszanicus\logic\DB;
+use Draszanicus\logic\User;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,8 @@ class ProfileController extends Controller
 
     public function execute()
     {
-        $userId = 2;
+        $user = User::getUser();
+        $userId = array_key_exists("id", $user) ? (int)$user["id"] : 0  ;
         $userData = $this->getUserData($userId);
         
 
@@ -24,14 +26,17 @@ class ProfileController extends Controller
         $view->assign("username", $userData['username'] ?? '');
         $view->assign("currentEmail", $userData['email'] ?? '');
         $view->assign("currentGroups", $this->getUserTeams($userId));
-        $error_info = "default";
+        $error_info = "";
      
 
         if (!empty($_POST['action'])) {
-                if ($_POST['action'] == "change-username") {
+            if ($_POST['action'] == "change-username") {
+              
+                
                $error_info =  $this->changeUsername($userId);
                 $view->assign("error_info",$error_info);
                 $view->setTemplate("Settings/Profile.tpl");
+
             }        
             elseif ($_POST['action'] == "change-password") {
                 
