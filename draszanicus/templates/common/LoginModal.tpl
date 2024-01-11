@@ -16,7 +16,7 @@
         <input class="form-control" type="text" placeholder="Login" name="inputLogin">
         </div>
     <div class="col-12 input-group my-1">
-        <input class="form-control" type="text" placeholder="Password" name="inputPassword">
+        <input class="form-control" type="password" placeholder="Password" name="inputPassword">
     </div>
     </div>
     </div>
@@ -30,10 +30,10 @@
         <input class="form-control" type="text" placeholder="Login" name="inputLogin">
         </div>
     <div class="col-12 input-group my-1">
-        <input class="form-control" type="text" placeholder="Password" name="inputPassword">
+        <input class="form-control" type="password" placeholder="Password" name="inputPassword">
     </div>
     <div class="col-12 input-group my-1">
-        <input class="form-control" type="text" placeholder="Repeat Password" name="inputPasswordAgain">
+        <input class="form-control" type="password" placeholder="Repeat Password" name="inputPasswordAgain">
     </div>
     <div class="col-12 input-group my-1">
         <input class="form-control" type="text" placeholder="e-mail" name="inputEmail">
