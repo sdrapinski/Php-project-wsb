@@ -3,7 +3,7 @@
   <li class="nav-item">
     <a class="nav-link" href="/profile">{$user["username"]}</a>
   </li>
-  <div id="logout" class="btn btn-primary" type="button">Wyloguj</div>
+  <div id="logout" class="btn btn-primary" type="button">Logout</div>
 </ul>
 {else} {include "./LoginModal.tpl"} {/if}
 
